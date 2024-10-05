@@ -1,28 +1,52 @@
 import React from "react";
-import UserContext from "../utils/useContext";
 import { useContext } from "react";
+import UserContext from "../utils/useContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
-        const { user } = useContext(UserContext);
-        return (
-                <div className="bg-gray-900 text-white py-4 mt-4">
-                        <div className="flex flex-row justify-around" >
-                        <div className="container mx-auto px-4">
-                                <h1 className="text-2xl">Loco Musica: Food & Tunes in Harmony
-                        </h1>
-                        </div>
-                        <div className="container mx-auto px-4">
-                                <p className="text-center">Welcome {user.name}!</p>
-                                <p className="text-center">Email: {user.email}</p>
-                        </div>
-                        </div>
+    const { user } = useContext(UserContext);
+    const currentYear = new Date().getFullYear();
 
-                        <div className="mt-6 pt-4 text-center">
-                                <p>© 2024 Loco Musica. All rights reserved.</p>
-                                <p>Bringing the rhythm to your taste buds, one order at a time!</p>
+    return (
+        <footer className="bg-gray-900 text-white py-8 mt-4">
+            <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row justify-around items-center -ml-20">
+                    <div className="text-center lg:text-left mb-2 lg:mb-0">
+                        <h1 className="text-2xl font-bold">Loco Musica</h1>
+                        <p className="text-gray-400">Food & Tunes in Harmony</p>
+                        <p className="text-sm mt-2">Bringing the rhythm to your taste buds, one order at a time!</p>
+                    </div>
+                    {user && (
+                        <div className="flex flex-col justify-center items-center text-center lg:text-left mb-2 lg:mb-0 -ml-20">
+                            <p className="text-xl font-semibold">Welcome, {user.name}!</p>
+                            <p className="text-sm">Email: {user.email}</p>
                         </div>
+                    )}
+                    <div className="text-center lg:text-right mt-4 lg:mt-0">
+                        <p className="font-semibold mb-2">Follow Us:</p>
+                        <div className="flex justify-center lg:justify-end space-x-6">
+                            <a href="#" className="hover:text-yellow-400">
+                                <FontAwesomeIcon icon={faFacebook} size="2x" />
+                            </a>
+                            <a href="#" className="hover:text-yellow-400">
+                                <FontAwesomeIcon icon={faTwitter} size="2x" />
+                            </a>
+                            <a href="#" className="hover:text-yellow-400">
+                                <FontAwesomeIcon icon={faInstagram} size="2x" />
+                            </a>
+                        </div>
+                    </div>
                 </div>
-        );
+            </div>
+            <div className="mt-6 pt-4 text-center border-t border-gray-700 flex flex-col items-center ml-10">
+                <p className="mb-1">© {currentYear} Loco Musica. All rights reserved.</p>
+                <a href="#" className="text-yellow-400 hover:underline mt-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    Back to Top
+                </a>
+            </div>
+        </footer>
+    );
 };
 
 export default Footer;
